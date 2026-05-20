@@ -78,7 +78,9 @@ const COMMANDS = {
 };
 
 const EASTER_EGGS = {
-  ls: () => [`about.txt  projects/  experience.txt  interests.txt  contact.txt`],
+  ls: () => [
+    `about.txt  projects/  experience.txt  interests.txt  contact.txt`,
+  ],
   pwd: () => [`/home/ally`],
   sudo: () => [`Nice try. You don't have root access here.`],
   hack: () => [
@@ -86,7 +88,9 @@ const EASTER_EGGS = {
     `jk — I'm a software engineer, not that kind.`,
     `But seriously, check out my projects.`,
   ],
-  coffee: () => [`☕  Running on: iced coffee, celcius, and debugging sessions`],
+  coffee: () => [
+    `☕  Running on: iced coffee, celcius, and debugging sessions`,
+  ],
   hire: () => [
     `Oh hi, recruiter 👋`,
     `I'm open to internships and new grad roles!`,
@@ -130,7 +134,9 @@ export function initTerminal() {
     historyIndex = -1;
 
     // Echo the command
-    print([`<span style="color:var(--clr-text-muted)">ally@terminal ~ %</span> ${raw.trim()}`]);
+    print([
+      `<span style="color:var(--clr-text-muted)">ally@terminal ~ %</span> ${raw.trim()}`,
+    ]);
 
     if (cmd === "clear") {
       output.innerHTML = "";
@@ -176,5 +182,7 @@ export function initTerminal() {
   });
 
   // Auto-focus terminal on click
-  document.getElementById("terminal")?.addEventListener("click", () => input.focus());
+  document
+    .getElementById("terminal")
+    ?.addEventListener("click", () => input.focus());
 }

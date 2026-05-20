@@ -60,8 +60,7 @@ ally-homepage/
 ├── images/
 │   └── favicon.svg         # SVG favicon
 ├── package.json
-├── .eslintrc.json
-├── .prettierrc
+├── eslint.config.js        # ESLint flat config (includes Prettier rules)
 ├── LICENSE
 └── README.md
 ```
@@ -95,14 +94,18 @@ npm start
 # Opens at http://localhost:3000
 ```
 
-### Format with Prettier
-
-```bash
-npm run format
-```
-
 ### Lint with ESLint
 
 ```bash
 npm run lint
 ```
+
+### Format JS (via ESLint + Prettier plugin)
+
+Formatting rules live in `eslint.config.js` (through `eslint-plugin-prettier`), so a single command both lints and fixes formatting:
+
+```bash
+npm run format
+```
+
+This runs `eslint --fix` on the `js/` directory. HTML and CSS are not auto-formatted.

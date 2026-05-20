@@ -6,13 +6,15 @@
   "scripts": {
     "start": "npx serve .",
     "dev": "npx live-server --port=3000",
-    "format": "prettier --write \"**/*.{html,css,js}\"",
-    "format:check": "prettier --check \"**/*.{html,css,js}\"",
+    "format": "eslint --fix js/**/*.js",
     "lint": "eslint js/**/*.js",
     "validate": "echo 'Run https://validator.w3.org to validate HTML'"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.6.0",
     "live-server": "^1.2.2",
     "prettier": "^3.2.5",
     "serve": "^14.2.1"
