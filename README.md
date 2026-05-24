@@ -1,42 +1,43 @@
 # Ally Descoteaux — Personal Homepage
 
-**Author:** Ally Descoteaux  
-**Class:** CSE 110 — Software Engineering  
+**Author:** Ally Descoteaux
+**Class:** CS5610 — Web Development
 **License:** MIT
+**Live site:** <https://ades-webdevproject1.netlify.app/>
 
 ---
 
 ## Project Objective
 
-Personal homepage built with vanilla HTML5, CSS3, and ES6+ JavaScript modules. No frameworks, no jQuery, no component libraries. The design takes a brutalist editorial magazine aesthetic — ruled lines, condensed type, asymmetric layouts — rather than the typical portfolio grid.
+Personal homepage built with vanilla HTML5, CSS3, and ES6+ JavaScript modules.
 
 ---
 
 ## Screenshot
 
-> *(Add after deploying — screenshot of index.html)*
+> *(Add after deploying — screenshot of `index.html`)*
 
 ---
 
 ## Pages
 
-| Page | URL | Description |
-|------|-----|-------------|
-| Home | `index.html` | Masthead, hero, about, experience table, projects, terminal |
-| Projects | `pages/projects.html` | Full project list with live tag filtering |
-| AI-generated | `pages/wrapped.html` | GitHub Wrapped — AI-analyzed commit data *(to add)* |
+| Page            | URL                   | Description                                                                                       |
+| --------------- | --------------------- | ------------------------------------------------------------------------------------------------- |
+| Home            | `index.html`          | Masthead, skills ticker, hero, about, experience table, featured projects, interactive terminal   |
+| Projects        | `pages/projects.html` | Full project list with live tag filtering                                                         |
+| Beyond the Code | `pages/hobbies.html`  | AI-generated essay on how hobbies (hiking, baking, puzzles, reading) shape engineering practice |
 
 ---
 
 ## Creative Feature
 
-An **interactive terminal** in the "ask me anything" section — visitors type commands to learn about me:
+An **interactive terminal** in the "ask me anything" section on the homepage — visitors type commands to learn about me:
 
 `about` · `skills` · `experience` · `projects` · `education` · `interests` · `contact` · `whoami` · `clear`
 
-Easter eggs: `git log`, `git status`, `sudo`, `hire`, `coffee`, `ls`, `pwd`, `cd projects`
+Easter eggs: `git log`, `git status`, `sudo`, `hire`, `coffee`, `ls`, `pwd`, `cd projects`, `date`
 
-Arrow keys navigate command history. Built entirely in vanilla ES6 (`js/terminal.js`).
+Arrow keys navigate command history. Built entirely in vanilla ES6 (`js/terminal.js`, ~190 lines, no libraries).
 
 ---
 
@@ -44,50 +45,64 @@ Arrow keys navigate command history. Built entirely in vanilla ES6 (`js/terminal
 
 ```
 ally-homepage/
-├── index.html
+├── index.html              # Home (masthead, ticker, hero, about, experience, projects, terminal)
 ├── pages/
-│   ├── projects.html
-│   └── wrapped.html        ← AI-generated page (to add)
+│   ├── projects.html       # Project list with tag filtering
+│   └── hobbies.html        # AI-generated "Beyond the Code"
 ├── css/
-│   ├── styles.css          ← global design tokens & shared components
-│   ├── home.css            ← homepage layout
-│   └── projects.css        ← projects page layout
+│   ├── styles.css          # Global design tokens & shared components
+│   ├── home.css            # Home page layout
+│   ├── projects.css        # Projects page layout
+│   └── hobbies.css         # Hobbies page layout
 ├── js/
-│   ├── main.js             ← ES6 entry point
-│   ├── nav.js              ← mobile nav toggle
-│   ├── ticker.js           ← infinite ticker duplication
-│   ├── counters.js         ← scroll-triggered animated counters
-│   ├── timeline.js         ← staggered row reveal
-│   ├── terminal.js         ← interactive terminal (creative feature)
-│   └── projects.js         ← projects page entry + filter
+│   ├── main.js             # Home page entry (ES6 module)
+│   ├── nav.js              # Mobile nav toggle
+│   ├── timeline.js         # Staggered scroll-reveal for experience rows
+│   ├── terminal.js         # Interactive terminal (creative feature)
+│   └── projects.js         # Projects page entry + tag filter
 ├── images/
 │   └── favicon.svg
+├── eslint.config.js        # ESLint flat config (Prettier rules integrated)
 ├── package.json
-├── eslint.config.js        # ESLint flat config (includes Prettier rules)
+├── package-lock.json
 ├── LICENSE
 └── README.md
 ```
+
+The skills ticker is CSS-only (`@keyframes ticker` in `css/home.css`) — no JS required.
 
 ---
 
 ## Setup
 
+Requires Node 18+ and npm.
+
 ```bash
+# Install dev dependencies
 npm install
 
 # Run locally
-npm run dev        # live-server at localhost:3000
+npm run dev          # live-server with auto-reload at http://localhost:3000
 # or
-npm start          # serve at localhost:3000
+npm start            # static serve at http://localhost:3000
 
-# Format
-npm run format
-
-# Lint
-npm run lint
+# Lint + auto-format (ESLint + eslint-plugin-prettier in one pass)
+npm run lint         # report issues
+npm run format       # auto-fix issues
 ```
 
-**Deploy:** GitHub Pages, Vercel, or Netlify — all work with static files.
+Formatting rules live inside `eslint.config.js` via `eslint-plugin-prettier`, so `eslint --fix` both lints and formats the JS. HTML and CSS are not auto-formatted — they're hand-maintained.
+
+---
+
+## Deployment
+
+Deployed on **Netlify** with continuous deployment from the `main` branch — every push triggers a fresh build.
+
+- **Live URL:** <https://ades-webdevproject1.netlify.app/>
+- **Build command:** none (vanilla static files)
+- **Publish directory:** repository root
+- **Pretty URLs:** enabled (Netlify default) — `/pages/projects` resolves to `/pages/projects.html`
 
 ---
 
@@ -95,30 +110,13 @@ npm run lint
 
 **Model:** Claude Sonnet 4.6 (Anthropic)
 
-**Used for:** Initial generation of the "Beyond Code" page as required by the rubric, some revisions were done by me to content and formatting
+**Used for:** Initial generation of the "Beyond the Code" page (`pages/hobbies.html` + `css/hobbies.css`) as required by the rubric. Content, copy, and formatting were then revised by me.
 
-**Prompts (paraphrased):**
-- "build a simple html page i can add to my person website that shows how my diferent hobbies, hiking, baking, puzzles, reqding all have qn impact on who i am and my work as a software engineer. this should show how many different aspects of ourselves play a part in education/work success. add a disclaimer that the page is written by AI, use these main styling themes
+**Prompt (paraphrased):**
 
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
-/* ============================
-   Tokens
-   ============================ */
-:root {
-  --ink: #1a1713;
-  --paper: #f5f0e8;
-  --paper-2: #ece6d8;
-  --rule: #1a1713;
-  --rule-light: #c8bfad;
-  --red: #c0392b;
-  --font-serif: "Playfair Display", "Georgia", serif;
-  --font-body: "Barlow", "Helvetica Neue", sans-serif;
-  --font-cond: "Barlow Condensed", "Arial Narrow", sans-serif;
-  --font-mono: "IBM Plex Mono", "Courier New", monospace;
-  --max: 1160px;
-  --col: calc((100% - 4rem) / 12);
-  --transition: 0.18s ease;
-}"
+> Build a simple HTML page I can add to my personal website that shows how my different hobbies — hiking, baking, puzzles, reading — all impact who I am and my work as a software engineer. The page should illustrate how many different aspects of ourselves play a part in education/work success. Include a disclaimer that the page is AI-written. Match the rest of the site's styling: Playfair Display + Barlow + Barlow Condensed + IBM Plex Mono; paper/ink color palette (`--ink: #1a1713`, `--paper: #f5f0e8`, `--red: #c0392b`); 1160px max width; ruled-line section dividers.
+
+The color and typography tokens passed in match the `:root` variables in `css/styles.css`, so the generated page inherits the same design system as the rest of the site.
 
 ---
 
@@ -128,16 +126,17 @@ npm run lint
 - [x] No jQuery, no component libraries
 - [x] CSS, JS, Images in separate folders
 - [x] Meta: author, description, icon
-- [x] Original JS feature >5 lines, no libraries (terminal.js, ~120 lines)
-- [x] Prettier formatted
-- [x] W3C compliant — validate at validator.w3.org
-- [x] ESLint config present
+- [x] Original JS feature >5 lines, no libraries (`js/terminal.js`, ~190 lines)
+- [x] Prettier formatted (via `eslint-plugin-prettier`)
+- [x] W3C compliant — validated at validator.w3.org
+- [x] ESLint config present (flat config)
 - [x] All images have alt attributes
-- [x] 2+ HTML pages at different URLs
+- [x] 2+ HTML pages at different URLs (3 pages)
 - [x] CSS classes used throughout
 - [x] Semantic HTML only (no div-buttons etc.)
 - [x] Clean CSS, no `!important`
 - [x] Flexbox and CSS Grid used
 - [x] MIT License
-- [x] package.json with all dependencies
+- [x] `package.json` with all dependencies
 - [x] GenAI usage documented above
+- [x] Deployed to a public URL
