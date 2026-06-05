@@ -9,4 +9,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// 
+// I like that fact you have more than 2 files of css nad js files, as well your webiste is responsive & intuitive website
